@@ -30,6 +30,10 @@ express()
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
   
   function register () {
-    console.log(request.query.username);
-    console.log(request.query.password);
+    var username = request.query.username 
+    var pass = request.query.password
+    
+    var options = {username: username, pass: pass};
+
+    response.render('pages/results', options);
   }
