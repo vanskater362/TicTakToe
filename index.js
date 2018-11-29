@@ -15,7 +15,7 @@ express()
   .get('/db', async (req, res) => {
     try {
       const client = await pool.connect()
-      const result = await client.query('SELECT username, wins, losses, draws FROM players INNER JOIN record ON players.id = record.playerID');
+      const result = await client.query('SELECT username, wins, losses, draws, points FROM players INNER JOIN record ON players.id = record.playerID ORDER BY points');
       //const result = await client.query('SELECT username FROM players');
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
