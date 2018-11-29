@@ -28,13 +28,13 @@ express()
     }
   })
   .get('/register', async (req, res) => {
-    //res.send('Username: ' + req.body.username + ' Password: ' + req.body.password );
-    //const query = 'SELECT username, password FROM players WHERE username = ' + req.body.username;
+    var username = req.body.username;
+    var password = req.body.password;
+
     const client = await pool.connect()
-    const result = await client.query({text: 'SELECT username, password FROM players WHERE username = $1 AND password = $2', values: ['Test1', 'Test1']});
+    const result = await client.query({text: 'SELECT username, password FROM players WHERE username = $1 AND password = $2', values: [username, password]});
     const results = { 'results': (result) ? result.rows : null};
     res.render('pages/db', results );
-    res.send(results);
     client.release();
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
