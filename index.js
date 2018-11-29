@@ -33,7 +33,8 @@ express()
     const client = await pool.connect()
     const result = await client.query(query);
     const results = { 'results': (result) ? result.rows : null};
-    res.render('pages/db', results );
+    //res.render('pages/db', results );
+    res.send(results);
     client.release();
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
