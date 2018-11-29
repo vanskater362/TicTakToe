@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 const { Pool } = require('pg');
+const bcrypt = require('bcrypt');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true
@@ -24,5 +25,9 @@ express()
       console.error(err);
       res.send("Error " + err);
     }
+  })
+  .get('/register', async (req, res) => {
+      console.log(request.query.username);
+      console.log(request.query.password);
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
