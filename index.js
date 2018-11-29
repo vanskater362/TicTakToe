@@ -27,10 +27,10 @@ express()
       res.send("Error " + err);
     }
   })
-  .post('/register', async (req, res) => {
-    var username = String(req.body.username);
-    var password = String(req.body.password);
-    res.send('user: ' + username + ' pass: ' + password);
+  .pget('/register', async (req, res) => {
+    //var username = String(req.body.username);
+    //var password = String(req.body.password);
+    res.send(req.body);
     /*const client = await pool.connect()
     const result = await client.query({text: 'SELECT username, password FROM players WHERE username = $1 AND password = $2', values: [username, password]});
     const results = { 'results': (result) ? result.rows : null};
