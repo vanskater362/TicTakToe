@@ -29,7 +29,11 @@ express()
     }
   })
   .get('/register', function (req, res){
-    res.render('pages/results', { username: req.body.username, pass: req.body.pass} );
+    console.log(req.body.username);
+    console.log(req.body.password);
+    console.log(request.query.username);
+    console.log(request.query.password);
+    res.render('pages/results', { username: req.body.username, pass: req.body.password} );
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
   
