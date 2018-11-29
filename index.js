@@ -11,7 +11,7 @@ const pool = new Pool({
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
-  .use(bodyParser())
+  .use(bodyParser.urlencoded({extended: true}))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
@@ -28,14 +28,16 @@ express()
       res.send("Error " + err);
     }
   })
-  .get('/register', register)
+  .get('/register', function (req, res){
+    res.render('pages/results', { username: req.body.username, pass: req.body.pass} );
+  })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
   
-  function register () {
+  /*function register () {
     var username = request.query.username 
     var pass = request.query.password
     
     var options = {username: username, pass: pass};
 
     res.render('pages/results', options);
-  }
+  }*/
