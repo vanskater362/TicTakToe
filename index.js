@@ -28,14 +28,14 @@ express()
     }
   })
   .get('/register', function (req, res){
-    //res.send('Username: ' + req.body.username + ' Password: ' + req.body.password );
-    const query = 'SELECT username, password FROM players WHERE username = ' + req.body.username;
+    res.send('Username: ' + req.body.username + ' Password: ' + req.body.password );
+    /*const query = 'SELECT username, password FROM players WHERE username = ' + req.body.username;
     const client = await pool.connect()
     const result = await client.query(query);
     const results = { 'results': (result) ? result.rows : null};
-    //res.render('pages/db', results );
+    res.render('pages/db', results );
     res.send(results);
-    client.release();
+    client.release();*/
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
   
