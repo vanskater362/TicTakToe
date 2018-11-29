@@ -11,7 +11,9 @@ const pool = new Pool({
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
-  .use(bodyParser.urlencoded({extended: true}))
+  .use(express.urlencoded({extended: true}))
+  .use(express.json())
+  //.use(bodyParser.urlencoded({extended: true}))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
@@ -27,15 +29,18 @@ express()
       res.send("Error " + err);
     }
   })
-  .get('/register', async (req, res) => {
-    //var username = String(req.body.username);
-    //var password = String(req.body.password);
-    res.send(req);
-    /*const client = await pool.connect()
+  .post('/register', async (req, res) => {
+    var username = req.body.username;
+    var password = req.body.password;
+    console.log("the user name is " + username);
+    console.log("the password is " + password);
+    const client = await pool.connect()
     const result = await client.query({text: 'SELECT username, password FROM players WHERE username = $1 AND password = $2', values: [username, password]});
     const results = { 'results': (result) ? result.rows : null};
     res.render('pages/db', results );
-    client.release();*/
+    client.release();
+    
+    //res.render('pages/results', username, password);
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
   
