@@ -19,7 +19,6 @@ express()
     try {
       const client = await pool.connect()
       const result = await client.query('SELECT username, wins, losses, draws, points FROM players INNER JOIN record ON players.id = record.playerID ORDER BY record.points DESC');
-      //const result = await client.query('SELECT username FROM players');
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
       client.release();
@@ -29,11 +28,12 @@ express()
     }
   })
   .post('/register', function (req, res){
-    console.log(req.body.username);
-    console.log(req.body.password);
-    console.log(req.query.username);
-    console.log(req.query.password);
-    res.send('Username: ' + req.body.username + ' Password: ' + req.body.password );
+    //res.send('Username: ' + req.body.username + ' Password: ' + req.body.password );
+    const client = await pool.connect()
+    const result = await client.query('SELECT username, password FROM players WHERE username = ' + req.body.username);
+    const results = { 'results': (result) ? result.rows : null};
+    res.render('pages/db', results );
+    client.release();
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
   
