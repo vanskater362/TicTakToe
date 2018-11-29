@@ -35,5 +35,5 @@ express()
     
     var options = {username: username, pass: pass};
 
-    response.render('pages/results', options);
+    res.render('pages/results', options);
   }
