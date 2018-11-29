@@ -26,8 +26,10 @@ express()
       res.send("Error " + err);
     }
   })
-  .get('/register', async (req, res) => {
-      console.log(request.query.username);
-      console.log(request.query.password);
-  })
+  .get('/register', register)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+  
+  function register () {
+    console.log(request.query.username);
+    console.log(request.query.password);
+  }
