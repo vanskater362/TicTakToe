@@ -30,7 +30,7 @@ express()
   .get('/register', function (req, res){
     //res.send('Username: ' + req.body.username + ' Password: ' + req.body.password );
     //const query = 'SELECT username, password FROM players WHERE username = ' + req.body.username;
-    //const client = await pool.connect()
+    const client = await pool.connect()
     const result = await client.query({text: 'SELECT username, password FROM players WHERE username = $1 AND password = $2', values: [req.body.username, req.body.password]});
     const results = { 'results': (result) ? result.rows : null};
     res.render('pages/db', results );
