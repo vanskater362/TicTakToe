@@ -28,8 +28,8 @@ express()
     }
   })
   .get('/register', async (req, res) => {
-    var username = req.body.username;
-    var password = req.body.password;
+    var username = String(req.body.username);
+    var password = String(req.body.password);
     res.send('user: ' + username + ' pass: ' + password);
     /*const client = await pool.connect()
     const result = await client.query({text: 'SELECT username, password FROM players WHERE username = $1 AND password = $2', values: [username, password]});
