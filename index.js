@@ -27,7 +27,7 @@ express()
       res.send("Error " + err);
     }
   })
-  .get('/register', async (req, res) => {
+  .post('/register', async (req, res) => {
     var username = String(req.body.username);
     var password = String(req.body.password);
     res.send('user: ' + username + ' pass: ' + password);
