@@ -29,8 +29,9 @@ express()
   })
   .post('/register', function (req, res){
     //res.send('Username: ' + req.body.username + ' Password: ' + req.body.password );
+    const query = 'SELECT username, password FROM players WHERE username = ' + req.body.username;
     const client = await pool.connect()
-    const result = await client.query('SELECT username, password FROM players WHERE username = ' + req.body.username);
+    const result = await client.query(query);
     const results = { 'results': (result) ? result.rows : null};
     res.render('pages/db', results );
     client.release();
