@@ -27,7 +27,7 @@ express()
       res.send("Error " + err);
     }
   })
-  .post('/register', function (req, res){
+  .get('/register', function (req, res){
     //res.send('Username: ' + req.body.username + ' Password: ' + req.body.password );
     const query = 'SELECT username, password FROM players WHERE username = ' + req.body.username;
     const client = await pool.connect()
