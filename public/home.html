@@ -7,11 +7,14 @@
 </head>
 <body>
    <h1>Submission Form</h1>   
-   <form action="/register" method="get">
-         <input type="text" name="username">
-         <input type="password" name="password">
-         <br>
-         <input type="submit" value="register">
+   <form action="/register" method="post">
+      <label for="username">Username: </label>   
+      <input id="username" type="text" name="username">
+      <br>
+      <label for="password">Password: </label>
+      <input id="password" type="password" name="password">
+      <br>
+      <input type="submit" value="register">
    </form>
 </body>
 </html>

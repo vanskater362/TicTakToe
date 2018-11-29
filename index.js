@@ -28,12 +28,12 @@ express()
       res.send("Error " + err);
     }
   })
-  .get('/register', function (req, res){
+  .post('/register', function (req, res){
     console.log(req.body.username);
     console.log(req.body.password);
     console.log(req.query.username);
     console.log(req.query.password);
-    res.render('pages/results', { username: req.body.username, pass: req.body.password} );
+    res.send('Username: ' + req.body.username + ' Password: ' + req.body.password );
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
   
