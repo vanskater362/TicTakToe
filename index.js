@@ -30,7 +30,7 @@ express()
       res.send("Error " + err);
     }
   })
-  .post('/register', async (req, res) => {
+  .post('/register', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var insertP = 'INSERT INTO players (username, password) VALUES($1,$2) RETURNING id';
