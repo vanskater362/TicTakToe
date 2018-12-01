@@ -30,18 +30,18 @@ express()
       res.send("Error " + err);
     }
   })
-  .post('/register', function (req, res) {
+  .post('/register', async (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
     var insertP = 'INSERT INTO players (username, password) VALUES($1,$2) RETURNING id';
     var insertR = 'INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,$1)';
+    const client = await pool.connect()
 
     bcrypt.hash(password, 10, function(err, hash){
-      const client = pool.connect()
-      client.query(insertP, [username, hash], function(err, result){
+      await client.query(insertP, [username, hash])/*, function(err, result){
         var playerid = result.rows[0].id;
         client.query(insertR, [playerid]);
-      });
+      });*/
     });
     client.release();
   })
