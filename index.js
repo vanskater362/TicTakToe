@@ -38,10 +38,10 @@ express()
     const client = await pool.connect()
 
     bcrypt.hash(password, 10, function(err, hash){
-      client.query(insertP, [username, hash])/*, function(err, result){
+      client.query(insertP, [username, hash], function(err, result){
         var playerid = result.rows[0].id;
         client.query(insertR, [playerid]);
-      });*/
+      });
     });
     client.release();
   })
