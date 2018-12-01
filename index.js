@@ -37,10 +37,10 @@ express()
     var insertR = 'INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,$1)';
 
     bcrypt.hash(password, 10, function(err, hash){
-      const client = await pool.connect()
-      await client.query(insertP, [username, hash], function(err, result){
+      const client = pool.connect()
+      client.query(insertP, [username, hash], function(err, result){
         var playerid = result.rows[0].id;
-        await client.query(insertR, [playerid]);
+        client.query(insertR, [playerid]);
       });
     });
     client.release();
