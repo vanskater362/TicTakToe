@@ -1,9 +1,10 @@
-const express = require('express')
-const path = require('path')
+const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 5000
 const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true
@@ -16,7 +17,7 @@ express()
   //.use(bodyParser.urlencoded({extended: true}))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('public/home.html'))
+  .get('/', (req, res) => res.render('./public/home.html'))
   .get('/db', async (req, res) => {
     try {
       const client = await pool.connect()
@@ -32,6 +33,32 @@ express()
   .post('/register', async (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
+    var insertP = 'INSERT INTO players (username, password) VALUES($1,$2) RETURNING id';
+    var insertR = 'INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,$1)';
+
+    bcrypt.hash(password, 10, function(err, hash){
+      const client = await pool.connect()
+      await client.query(insertP, [username, hash], function(err, result){
+        var playerid = result.rows[0].id;
+        await client.query(insertR, [playerid]);
+      });
+    });
+    client.release();
+  })
+  .get('/p1login', async (req, res) => {
+    var username = req.body.player1;
+    var password = req.body.p1pass;
+    console.log("the user name is " + username);
+    console.log("the password is " + password);
+    const client = await pool.connect()
+    const result = await client.query({text: 'SELECT username, password FROM players WHERE username = $1 AND password = $2', values: [username, password]});
+    const results = { 'results': (result) ? result.rows : null};
+    res.render('pages/db', results );
+    client.release();  
+  })
+  .get('/p2login', async (req, res) => {
+    var username = req.body.player2;
+    var password = req.body.p2pass;
     console.log("the user name is " + username);
     console.log("the password is " + password);
     const client = await pool.connect()
@@ -39,16 +66,5 @@ express()
     const results = { 'results': (result) ? result.rows : null};
     res.render('pages/db', results );
     client.release();
-    
-    //res.render('pages/results', username, password);
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-  
-  /*function register () {
-    var username = request.query.username 
-    var pass = request.query.password
-    
-    var options = {username: username, pass: pass};
-
-    res.render('pages/results', options);
-  }*/
