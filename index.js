@@ -42,9 +42,9 @@ express()
         var playerid = result.rows[0].id;
         client.query(insertR, [playerid]);
       });
+      client.release();
+      res.render('pages/db');
     });
-    client.release();
-    res.render('pages/db');
   })
   .get('/p1login', async (req, res) => {
     var username = req.body.player1;
