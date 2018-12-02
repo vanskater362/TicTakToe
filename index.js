@@ -41,11 +41,11 @@ express()
       client.query(insertP, [username, hash], function(err, result){
         var playerid = result.rows[0].id;
         client.query(insertR, [playerid]);
+        const result = client.query('SELECT username, wins, losses, draws, points FROM players INNER JOIN record ON players.id = record.playerID ORDER BY record.points DESC');
+        const results = { 'results': (result) ? result.rows : null};
+        res.render('pages/db', results );
+        client.release();
       });
-      const result = client.query('SELECT username, wins, losses, draws, points FROM players INNER JOIN record ON players.id = record.playerID ORDER BY record.points DESC');
-      const results = { 'results': (result) ? result.rows : null};
-      res.render('pages/db', results );
-      client.release();
     });
   })
   .get('/p1login', async (req, res) => {
