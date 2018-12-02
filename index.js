@@ -42,7 +42,7 @@ express()
         var playerid = result.rows[0].id;
         client.query(insertR, [playerid]);
       });
-      const result = await client.query('SELECT username, wins, losses, draws, points FROM players INNER JOIN record ON players.id = record.playerID ORDER BY record.points DESC');
+      const result = client.query('SELECT username, wins, losses, draws, points FROM players INNER JOIN record ON players.id = record.playerID ORDER BY record.points DESC');
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
       client.release();
