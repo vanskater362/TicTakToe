@@ -44,16 +44,18 @@ express()
       });
     });
     client.release();
+    res.render('pages/db');
   })
   .get('/p1login', async (req, res) => {
     var username = req.body.player1;
     var password = req.body.p1pass;
-    console.log("the user name is " + username);
-    console.log("the password is " + password);
-    const client = await pool.connect()
-    const result = await client.query({text: 'SELECT username, password FROM players WHERE username = $1 AND password = $2', values: [username, password]});
-    const results = { 'results': (result) ? result.rows : null};
-    res.render('pages/db', results );
+    var check = 'SELECT username, password FROM players WHERE username = $1 AND password = $2';
+    const client = await pool.connect();
+
+    await client.query(check, [username, password], function(err, result){
+      bcrypt.compare(password, result[0].password, function(err, res){
+      });
+    });
     client.release();  
   })
   .get('/p2login', async (req, res) => {
