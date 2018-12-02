@@ -42,9 +42,11 @@ express()
         var playerid = result.rows[0].id;
         client.query(insertR, [playerid]);
       });
-      client.release();
-      res.render('pages/db');
     });
+    const result = await client.query('SELECT username, wins, losses, draws, points FROM players INNER JOIN record ON players.id = record.playerID ORDER BY record.points DESC');
+    const results = { 'results': (result) ? result.rows : null};
+    res.render('pages/db', results );
+    client.release();
   })
   .get('/p1login', async (req, res) => {
     var username = req.body.player1;
