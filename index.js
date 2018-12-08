@@ -48,7 +48,7 @@ express()
     bcrypt.hash(password, 10, function(err, hash){
       client.query(insertP, [username, hash], function(err, result){
         if (err){
-          regResult = {success: true};
+          regResult = {success: false};
         } else {
           var playerid = result.rows[0].id;
           client.query(insertR, [playerid]);
