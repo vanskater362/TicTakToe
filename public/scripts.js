@@ -12,7 +12,6 @@ function register() {
    };
 
 	$.post("/register", params, function(regResult) {
-      console.log(result.success);
 		if (regResult && regResult.success) {
 			$("#Reg").text("Successfully registered.");
 		} else if (result.success = null) {
