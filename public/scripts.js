@@ -13,7 +13,7 @@ function register() {
    
    console.log(params);
 
-	$.post("/register", params, function(result) {
+	$.post("/register", params, function(regResult) {
 		if (regResult && regResult.success) {
 			$("#Reg").text("Successfully registered.");
 		} else {
