@@ -54,6 +54,7 @@ express()
             client.release();
           } else {
             regResult = {success :false};
+            client.release();
           }
       });
     });
