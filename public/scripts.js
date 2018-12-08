@@ -11,8 +11,8 @@ function register() {
 		password: password
    };
 
-	$.post("/register", params, function(regResult) {
-		if (regResult.success == 1) {
+	$.post("/register", params, function(result) {
+		if (result.success == 1) {
 			$("#Reg").text("Successfully registered.");
 		} else {
 			$("#Reg").text("Error registering.");

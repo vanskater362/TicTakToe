@@ -39,7 +39,7 @@ express()
   .post('/register', async (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
-    var regResult = {success: 0};
+    var result = {success: 0};
     
     var insertP = 'INSERT INTO players (username, password) VALUES($1,$2) RETURNING id';
     var insertR = 'INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,$1)';
@@ -57,7 +57,7 @@ express()
           }
       });
     });
-    res.json(regResult);
+    res.json(result);
   })
   .get('/p1login', async (req, res) => {
     var username = req.body.player1;
