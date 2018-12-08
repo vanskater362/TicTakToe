@@ -9,7 +9,9 @@ function register() {
 	var params = {
 		username: username,
 		password: password
-	};
+   };
+   
+   console.log(params);
 
 	$.post("/register", params, function(result) {
 		if (regResult && regResult.success) {
