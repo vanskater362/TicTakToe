@@ -15,6 +15,11 @@ express()
   .use(express.static(path.join(__dirname, 'public')))
   .use(express.urlencoded({extended: true}))
   .use(express.json())
+  .use(session({
+    secret: 'Pretzles-smarties-BabyMonitor!',
+    resave: false,
+    saveUninitialized: true,
+  }))
   //.use(bodyParser.urlencoded({extended: true}))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
@@ -42,21 +47,29 @@ express()
 
     bcrypt.hash(password, 10, function(err, hash){
       client.query(insertP, [username, hash], function(err, result){
-        var playerid = result.rows[0].id;
-        client.query(insertR, [playerid]);
-        regResult = {success: true};
-        client.release();
-        res.json(regResult);
+        if (err){
+          regResult = {success: true};
+        } else {
+          var playerid = result.rows[0].id;
+          client.query(insertR, [playerid]);
+          regResult = {success: true};
+          client.release();
+        }
       });
     });
+    res.json(regResult);
   })
   .get('/p1login', async (req, res) => {
     var username = req.body.player1;
     var password = req.body.p1pass;
+    var result = {success: false};
     var check = 'SELECT username, password FROM players WHERE username = $1 AND password = $2';
     const client = await pool.connect();
 
-    await client.query(check, [username, password], function(err, result){
+    await client.query(check, [username, password], function(err, res){
+      if (err) {
+        res.json(result);
+      }
       bcrypt.compare(password, result[0].password, function(err, res){
       });
     });
