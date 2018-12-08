@@ -36,10 +36,11 @@
                   <br>
                   <input type="submit" value="Log In">
                </form>
+               <p id="P1"></p>
             </div>
             <div class="col-lg text-center">             
                <h4 title="Click to Register" onclick="unhide('r1')">Register New User</h4>
-               <form id="r1" action="/register" method="post" style="visibility: hidden;">
+               <form id="r1" action="register()" method="post" style="visibility: hidden;">
                   <label for="username">Username: </label>   
                   <input id="username" type="text" name="username">
                   <br>
@@ -48,6 +49,7 @@
                   <br>
                   <input type="submit" value="Register">
                </form>
+               <p id="Reg"></p>
             </div>
             <div class="col-lg text-center">
                   <h4 title="Click to Login" onclick="unhide('p2')">Player Two Login</h4>
@@ -60,6 +62,7 @@
                      <br>
                      <input type="submit" value="Log In">
                   </form>
+                  <p id="P2"></p>
             </div>
          </div>
    </div>  

@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const session = require('express-session')
 const PORT = process.env.PORT || 5000
 const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
@@ -33,20 +34,22 @@ express()
   .post('/register', async (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
+    var regResult = {success: false};
     var insertP = 'INSERT INTO players (username, password) VALUES($1,$2) RETURNING id';
     var insertR = 'INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,$1)';
     const client = await pool.connect()
 
     bcrypt.hash(password, 10, function(err, hash){
       client.query(insertP, [username, hash], function(err, result){
+        var result = {success: false};
         var playerid = result.rows[0].id;
         client.query(insertR, [playerid]);
-        const result1 = client.query('SELECT username, wins, losses, draws, points FROM players INNER JOIN record ON players.id = record.playerID ORDER BY record.points DESC');
-        const results = { 'results': (result1) ? result1.rows : null};
-        res.render('pages/db', results );
+        //const result1 = client.query('SELECT username, wins, losses, draws, points FROM players INNER JOIN record ON players.id = record.playerID ORDER BY record.points DESC');
         client.release();
+        regResult = {success: true};
       });
     });
+    res.json(regResult);
   })
   .get('/p1login', async (req, res) => {
     var username = req.body.player1;
