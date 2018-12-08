@@ -40,6 +40,7 @@ express()
     var username = req.body.username;
     var password = req.body.password;
     var regResult = {success: false};
+    var playerid = "NaN";
     
     var insertP = 'INSERT INTO players (username, password) VALUES($1,$2) RETURNING id';
     var insertR = 'INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,$1)';
@@ -47,7 +48,7 @@ express()
 
     bcrypt.hash(password, 10, function(err, hash){
       client.query(insertP, [username, hash], function(err, result){
-          var playerid = result.rows[0].id;
+          playerid = result.rows[0].id;
           if (!isNaN(playerid)) {
             client.query(insertR, [playerid]);
             regResult = {success: true};
