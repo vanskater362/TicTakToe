@@ -48,13 +48,12 @@ express()
     bcrypt.hash(password, 10, function(err, hash){
       client.query(insertP, [username, hash], function(err, result){
           var playerid = result.rows[0].id;
-          if (isNaN(playerid)) {
-            regResult = {success :false};
-          }
-          else {
+          if (!isNaN(playerid)) {
             client.query(insertR, [playerid]);
             regResult = {success: true};
             client.release();
+          } else {
+            regResult = {success :false};
           }
       });
     });
