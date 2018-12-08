@@ -42,14 +42,13 @@ express()
 
     bcrypt.hash(password, 10, function(err, hash){
       client.query(insertP, [username, hash], function(err, result){
-        var result = {success: false};
         var playerid = result.rows[0].id;
         client.query(insertR, [playerid]);
         //const result1 = client.query('SELECT username, wins, losses, draws, points FROM players INNER JOIN record ON players.id = record.playerID ORDER BY record.points DESC');
+        regResult = {success: true};
         client.release();
       });
     });
-    regResult = {success: true};
     res.json(regResult);
   })
   .get('/p1login', async (req, res) => {
