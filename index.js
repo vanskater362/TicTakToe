@@ -39,7 +39,7 @@ express()
   .post('/register', async (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
-    var regResult = {success: false};
+    var regResult = {success: 0};
     
     var insertP = 'INSERT INTO players (username, password) VALUES($1,$2) RETURNING id';
     var insertR = 'INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,$1)';
@@ -50,11 +50,10 @@ express()
           if (typeof result.rows[0].id !== "undefined"){
             var playerid = result.rows[0].id;
             client.query(insertR, [playerid]);
-            regResult = {success: true};
+            regResult = {success: 1};
             client.release();
           } else {
-            regResult = {success :false};
-            client.release();
+            regResult = {success: 0};
           }
       });
     });

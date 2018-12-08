@@ -12,7 +12,7 @@ function register() {
    };
 
 	$.post("/register", params, function(regResult) {
-		if (regResult.success == true) {
+		if (regResult.success == 1) {
 			$("#Reg").text("Successfully registered.");
 		} else {
 			$("#Reg").text("Error registering.");
