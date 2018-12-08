@@ -15,7 +15,7 @@ function register() {
       console.log(result.success);
 		if (regResult && regResult.success) {
 			$("#Reg").text("Successfully registered.");
-		} else {
+		} else if (result.success = null) {
 			$("#Reg").text("Error registering.");
 		}
 	});

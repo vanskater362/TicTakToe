@@ -48,9 +48,14 @@ express()
     bcrypt.hash(password, 10, function(err, hash){
       client.query(insertP, [username, hash], function(err, result){
           var playerid = result.rows[0].id;
-          client.query(insertR, [playerid]);
-          regResult = {success: playerid};
-          client.release();
+          if (playerid = null) {
+            regResult = {success :false};
+          }
+          else {
+            client.query(insertR, [playerid]);
+            regResult = {success: true};
+            client.release();
+          }
       });
     });
     res.json(regResult);
