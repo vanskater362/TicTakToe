@@ -14,7 +14,7 @@ function register() {
 	$.post("/register", params, function(regResult) {
 		if (regResult && regResult.success) {
 			$("#Reg").text("Successfully registered.");
-		} else if (result.success = null) {
+		} else {
 			$("#Reg").text("Error registering.");
 		}
 	});
