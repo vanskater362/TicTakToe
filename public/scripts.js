@@ -1,6 +1,6 @@
-function unhide(id) {
+/*function unhide(id) {
    document.getElementById(id).style.visibility = "visible";
-}
+}*/
 
 function register() {
 	var username = $("#username").val();

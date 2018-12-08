@@ -40,15 +40,16 @@
             </div>
             <div class="col-lg text-center">             
                <h4 title="Click to Register" onclick="unhide('r1')">Register New User</h4>
-               <form id="r1" action="register()" method="post" style="visibility: hidden;">
-                  <label for="username">Username: </label>   
+               <!--<form action="register()" method="post" style="visibility: hidden;">-->
+                  <label class="r1" for="username">Username: </label>   
                   <input id="username" type="text" name="username">
                   <br>
                   <label for="password">Password: </label>
                   <input id="password" type="password" name="password">
                   <br>
-                  <input type="submit" value="Register">
-               </form>
+                  <button onclick="register()">Register</button>
+                  <!--<input type="submit" value="Register">
+               </form>-->
                <p id="Reg"></p>
             </div>
             <div class="col-lg text-center">
