@@ -12,6 +12,7 @@ function register() {
    };
 
 	$.post("/register", params, function(regResult) {
+      console.log(result.success);
 		if (regResult && regResult.success) {
 			$("#Reg").text("Successfully registered.");
 		} else {
@@ -30,7 +31,7 @@ function p1login() {
 	};
 
 	$.post("/p1login", params, function(result) {
-      console.log(result.success);
+      
 		if (result && result.success) {
 			$("P1").text("Successfully logged in.");
 		} else {
