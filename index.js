@@ -65,7 +65,7 @@ express()
     console.log(username);
     console.log(password);
     var result = {success: false};
-    var check = 'SELECT username, password FROM players WHERE username = $1 AND password = $2';
+    var check = 'SELECT username, password FROM players WHERE username = $1';
     const client = await pool.connect();
 
     client.query(check, [username, password], function(err, res){
