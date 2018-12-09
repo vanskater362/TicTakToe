@@ -71,7 +71,7 @@ express()
         console.log("Fail User doesn't match");
       }
       else {
-        bcrypt.compare(password, res[0].password, function(err, res){
+        bcrypt.compare(req.body.password, res[0].password, function(err, res){
           if(!res) {
             response.json({success: false});
             console.log("Fail: Password doesn't match");
