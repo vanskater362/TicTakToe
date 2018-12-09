@@ -84,11 +84,11 @@ express()
           }
         });*/
         result = {success: true};
-        console.log(result);
+        console.log(password);
         console.log("Success!");
       }
-      response.json(result);
     });
+    response.json(result);
     client.release();  
   })
   .get('/p2login', async (req, res) => {
