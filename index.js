@@ -18,7 +18,7 @@ express()
   .use(session({
     secret: 'Pretzles-smarties-BabyMonitor!',
     resave: true,
-    store: store,
+    store: true,
     saveUninitialized: true,
   }))
   //.use(bodyParser.urlencoded({extended: true}))
