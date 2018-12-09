@@ -39,7 +39,6 @@ express()
   .post('/register', async (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
-    var result = {success: false};
     
     var insertP = 'INSERT INTO players (username, password) VALUES($1,$2) RETURNING id';
     var insertR = 'INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,$1)';
@@ -63,6 +62,37 @@ express()
     var username = req.body.username;
     var password = req.body.password;
     var hashedpass = null;
+    //var sql = 'SELECT username, password FROM players WHERE username = $1::text';
+    const client = await pool.connect();
+
+    client.query('SELECT password FROM players WHERE username = $1', [username], function(err, res){
+      hashedpass = res.rows[0].password;
+      if(!res){
+        res = {success: false, message: "Login Error: User not found!"};
+        response.json(res);
+        console.log("Fail User doesn't match");
+      }
+      else {
+        bcrypt.compare(password, hashedpass, function(err, ress){
+          if(!ress) {
+            ress = {success: false, message: "Login Error: Password doesn't match!"};
+            console.log("Fail: Password doesn't match");
+          }
+          else {
+            req.session.user = username;
+            ress = {success: true, message: "Successful Login!"};
+            console.log("Success!");
+          }
+          response.json(ress);
+        });
+      }
+    });
+    client.release();  
+  })
+  .post('/p2login', async (req, response) => {
+    var username = req.body.username;
+    var password = req.body.password;
+    var hashedpass = null;
     var result = {success: false};
     //var sql = 'SELECT username, password FROM players WHERE username = $1::text';
     const client = await pool.connect();
@@ -81,7 +111,7 @@ express()
             console.log("Fail: Password doesn't match");
           }
           else {
-            req.session.user = req.body.username;
+            req.session.user = username;
             ress = {success: true, message: "Successful Login!"};
             console.log("Success!");
           }
@@ -90,16 +120,5 @@ express()
       }
     });
     client.release();  
-  })
-  .get('/p2login', async (req, res) => {
-    var username = req.body.player2;
-    var password = req.body.p2pass;
-    console.log("the user name is " + username);
-    console.log("the password is " + password);
-    const client = await pool.connect()
-    const result = await client.query({text: 'SELECT username, password FROM players WHERE username = $1 AND password = $2', values: [username, password]});
-    const results = { 'results': (result) ? result.rows : null};
-    res.render('pages/db', results );
-    client.release();
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
