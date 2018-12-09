@@ -100,7 +100,7 @@ express()
 
     client.query('SELECT password FROM players WHERE username = $1', [username], function(err, res){
       console.log(res.rows);
-      if(res.rows = null){
+      if(res.length === 0){
         res = {success: false, message: "Login Error: User not found!"};
         response.json(res);
         console.log("Fail User doesn't match");
