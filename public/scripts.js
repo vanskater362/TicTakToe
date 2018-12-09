@@ -30,7 +30,8 @@ function p1login() {
 	};
 
 	$.post("/p1login", params, function(result) {
-      console.log(result);
+      console.log(result.message);
+      console.log(req.session.username);
       
 		if (result && result.success) {
 			$("P1").text(result.message);
