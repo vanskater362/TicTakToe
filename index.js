@@ -68,6 +68,7 @@ express()
 
     client.query('SELECT password FROM players WHERE username = $1', [username], function(err, res){
       var obj = JSON.parse(res.rows);
+      console.log(obj.password);
       if(!res){
         console.log("Fail User doesn't match");
       }
