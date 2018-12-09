@@ -48,11 +48,11 @@ express()
     bcrypt.hash(password, 10, function(err, hash){
       client.query(insertP, [username, hash], function(err, result){
           if (!result){
-            regResult = {success: false};
+            result = {success: false};
           } else {
             var playerid = result.rows[0].id;
             client.query(insertR, [playerid]);
-            regResult = {success: true};
+            result = {success: true};
             client.release();
           }
           res.json(result);
@@ -67,15 +67,19 @@ express()
     const client = await pool.connect();
 
     await client.query(check, [username, password], function(err, res){
-      bcrypt.compare(password, result[0].password, function(err, res){
-        if(!res) {
-          res.json({success: false});
-        }
-        else {
-          req.session.user = req.body.username;
-          res.json({success: true})
-        }
-      });
+      if(!res){
+        res.json({success: false});
+      } else {
+          bcrypt.compare(password, result[0].password, function(err, res){
+            if(!res) {
+              res.json({success: false});
+            }
+            else {
+              req.session.user = req.body.username;
+              res.json({success: true});
+            }
+          });
+      }
     });
     client.release();  
   })
