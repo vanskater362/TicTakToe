@@ -75,12 +75,12 @@ express()
         console.log(hashedpass);
         bcrypt.compare(password, hashedpass, function(err, ress){
           if(!ress) {
-            response.json({success: false});
+            result = {success: false};
             console.log("Fail: Password doesn't match");
           }
           else {
             req.session.user = req.body.username;
-            response.json({success: true});
+            result = {success: true};
             console.log("Success!");
           }
         });
