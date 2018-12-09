@@ -23,7 +23,7 @@ express()
   //.use(bodyParser.urlencoded({extended: true}))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('./public/home.html'))
+  .get('/', (req, res) => res.render('pages/index'))
   .get('/db', async (req, res) => {
     try {
       const client = await pool.connect()
@@ -67,15 +67,13 @@ express()
     const client = await pool.connect();
 
     client.query('SELECT password FROM players WHERE username = $1', [username], function(err, res){
-      console.log(res.rows[0].password);
-      var hashedpass = res.rows[0].password;
       if(!res){
         console.log("Fail User doesn't match");
       }
       else {
         console.log(hashedpass);
-        bcrypt.compare(password, hashedpass, function(err, res){
-          if(!res) {
+        bcrypt.compare(password, hashedpass, function(err, ress){
+          if(!ress) {
             response.json({success: false});
             console.log("Fail: Password doesn't match");
           }
