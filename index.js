@@ -71,17 +71,18 @@ express()
     await client.query(check, [username, password], function(err, res){
       if(!res){
         response.json({success: false});
-      } else {
-          bcrypt.compare(password, result[0].password, function(err, res){
-            if(!res) {
-              response.json({success: false});
-            }
-            else {
-              req.session.user = req.body.username;
-              response.json({success: true});
-            }
-          });
       }
+      /*else {
+        bcrypt.compare(password, result[0].password, function(err, res){
+          if(!res) {
+            response.json({success: false});
+          }
+          else {
+            req.session.user = req.body.username;
+            response.json({success: true});
+          }
+        });
+      }*/
     });
     client.release();  
   })
