@@ -71,7 +71,7 @@ express()
       hashedpass = res.rows[0].password;
       if(!res){
         res = {success: false, message: "Login Error: User not found!"};
-        response.json(result);
+        response.json(res);
         console.log("Fail User doesn't match");
       }
       else {
@@ -85,7 +85,7 @@ express()
             ress = {success: true, message: "Successful Login!"};
             console.log("Success!");
           }
-          response.json(result);
+          response.json(ress);
         });
       }
     });
