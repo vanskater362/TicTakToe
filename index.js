@@ -73,6 +73,7 @@ express()
         console.log("Fail User doesn't match");
       }
       else {
+        console.log(hashedpass);
         bcrypt.compare(password, hashedpass, function(err, res){
           if(!res) {
             response.json({success: false});
