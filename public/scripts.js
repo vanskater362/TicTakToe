@@ -29,7 +29,7 @@ function p1login() {
 		password: password
 	};
 
-	$.post("/p1login", params, function(result) {
+	$.get("/p1login", params, function(result) {
       
 		if (result && result.success) {
 			$("P1").text("Successfully logged in.");

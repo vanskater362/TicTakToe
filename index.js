@@ -59,7 +59,7 @@ express()
       });
     });
   })
-  .post('/p1login', async (req, res) => {
+  .get('/p1login', async (req, res) => {
     var username = req.body.player1;
     var password = req.body.p1pass;
     var result = {success: false};
