@@ -65,10 +65,10 @@ express()
     console.log(username);
     console.log(password);
     var result = {success: false};
-    var check = 'SELECT username, password FROM players WHERE username = $1';
+    var check = 'SELECT username, password FROM players WHERE username = $1::text';
     const client = await pool.connect();
 
-    client.query(check, [username, password], function(err, res){
+    client.query(check, [username], function(err, res){
       if(!res){
         console.log("Fail User doesn't match");
       }
@@ -83,8 +83,6 @@ express()
             response.json({success: true});
           }
         });
-        result = {success: true};
-        console.log(password);
         console.log("Success!");
       }
     });
