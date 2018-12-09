@@ -62,18 +62,19 @@ express()
   .post('/p1login', async (req, response) => {
     var username = req.body.username;
     var password = req.body.password;
+    var hashedpass = null;
     var result = {success: false};
     //var sql = 'SELECT username, password FROM players WHERE username = $1::text';
     const client = await pool.connect();
 
     client.query('SELECT password FROM players WHERE username = $1', [username], function(err, res){
-      var hashedpass = res.rows[0].password;
+      hashedpass = res.rows[0].password;
       if(!res){
         res = {success: false, message: "Login Error: User not found!"};
+        response.json(result);
         console.log("Fail User doesn't match");
       }
       else {
-        console.log(hashedpass);
         bcrypt.compare(password, hashedpass, function(err, ress){
           if(!ress) {
             ress = {success: false, message: "Login Error: Password doesn't match!"};
@@ -84,10 +85,10 @@ express()
             ress = {success: true, message: "Successful Login!"};
             console.log("Success!");
           }
+          response.json(result);
         });
       }
     });
-    response.json(result);
     client.release();  
   })
   .get('/p2login', async (req, res) => {
