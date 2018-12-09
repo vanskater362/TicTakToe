@@ -67,11 +67,13 @@ express()
     const client = await pool.connect();
 
     client.query('SELECT password FROM players WHERE username = $1', [username], function(err, res){
+      console.log(res.rows[0].password);
+      var hashedpass = res.rows[0].password;
       if(!res){
         console.log("Fail User doesn't match");
       }
       else {
-        bcrypt.compare(req.body.password, res.rows[0].password, function(err, res){
+        bcrypt.compare(password, hashedpass, function(err, res){
           if(!res) {
             response.json({success: false});
             console.log("Fail: Password doesn't match");
