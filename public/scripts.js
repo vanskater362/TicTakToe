@@ -30,8 +30,7 @@ function p1login() {
 	};
 
 	$.post("/p1login", params, function(result) {
-      console.log(result.message);
-      console.log(req.session.username);
+      console.log(result);
       
 		if (result && result.success) {
 			$("P1").text(result.message);
@@ -51,7 +50,7 @@ function p2login() {
 	};
 
 	$.post("/p2login", params, function(result) {
-      console.log(result.message);
+      console.log(result);
       
 		if (result && result.success) {
 			$("P2").text(result.message);
