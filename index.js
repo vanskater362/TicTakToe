@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const session = require('express-session')
+const session = require('express-session');
 const PORT = process.env.PORT || 5000
 const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
@@ -59,9 +59,11 @@ express()
       });
     });
   })
-  .get('/p1login', async (req, response) => {
-    var username = req.body.player1;
-    var password = req.body.p1pass;
+  .post('/p1login', async (req, response) => {
+    var username = req.body.username;
+    var password = req.body.password;
+    console.log(username);
+    console.log(password);
     var result = {success: false};
     var check = 'SELECT username, password FROM players WHERE username = $1 AND password = $2';
     const client = await pool.connect();

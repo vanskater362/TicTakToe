@@ -22,14 +22,16 @@ function register() {
 
 function p1login() {
 	var username = $("#player1").val();
-	var password = $("#p1pass").val();
+   var password = $("#p1pass").val();
+   console.log(username);
+   console.log(password);
 
 	var params = {
 		username: username,
 		password: password
 	};
 
-	$.get("/p1login", params, function(result) {
+	$.post("/p1login", params, function(result) {
       
 		if (result && result.success) {
 			$("P1").text("Successfully logged in.");
