@@ -17,7 +17,8 @@ express()
   .use(express.json())
   .use(session({
     secret: 'Pretzles-smarties-BabyMonitor!',
-    resave: false,
+    resave: true,
+    store: store,
     saveUninitialized: true,
   }))
   //.use(bodyParser.urlencoded({extended: true}))
@@ -79,7 +80,7 @@ express()
             console.log("Fail: Password doesn't match");
           }
           else {
-            req.session.user = username;
+            req.session.player1 = username;
             ress = {success: true, message: "Successful Login!"};
             console.log("Success!");
           }
@@ -111,7 +112,7 @@ express()
             console.log("Fail: Password doesn't match");
           }
           else {
-            req.session.user = username;
+            req.session.player2 = username;
             ress = {success: true, message: "Successful Login!"};
             console.log("Success!");
           }
@@ -120,5 +121,14 @@ express()
       }
     });
     client.release();  
+  })
+
+  .post('/getrecord', async (req, response) => {
+    var sql = 'SELECT wins, losses, draws, points FROM record WHERE playerid = $playerid;';
+  })
+  .post('/updateRecord', async (req, response) => {
+    var sqlwinner = 'UPDATE wins';
+    var sqllose;
+    var sqldraw;
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

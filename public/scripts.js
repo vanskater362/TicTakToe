@@ -40,3 +40,27 @@ function p1login() {
 		}
 	});
 }
+
+function p2login() {
+	var username = $("#player2").val();
+   var password = $("#p2pass").val();
+
+	var params = {
+		username: username,
+		password: password
+	};
+
+	$.post("/p2login", params, function(result) {
+      console.log(result.message);
+      
+		if (result && result.success) {
+			$("P2").text(result.message);
+		} else {
+			$("P2").text(result.message);
+		}
+	});
+}
+
+function updateRecord() {
+
+}
