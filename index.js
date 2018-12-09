@@ -62,12 +62,11 @@ express()
   .post('/p1login', async (req, response) => {
     var username = req.body.username;
     var password = req.body.password;
-    var params = [username, password];
     var result = {success: false};
-    var sql = 'SELECT username, password FROM players WHERE username = $1::text';
+    //var sql = 'SELECT username, password FROM players WHERE username = $1::text';
     const client = await pool.connect();
 
-    client.query(sql, params, function(err, res){
+    client.query('SELECT username, password FROM players WHERE username = $1', [username], function(err, res){
       console.log(res.rows);
       if(!res){
         console.log("Fail User doesn't match");
