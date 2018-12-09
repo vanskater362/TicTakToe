@@ -99,6 +99,7 @@ express()
     const client = await pool.connect();
 
     client.query('SELECT password FROM players WHERE username = $1', [username], function(err, res){
+      console.log(res.rows);
       if(!res){
         res = {success: false, message: "Login Error: User not found!"};
         response.json(res);
