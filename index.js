@@ -67,7 +67,7 @@ express()
     const client = await pool.connect();
 
     client.query('SELECT password FROM players WHERE username = $1', [username], function(err, res){
-      console.log(res);
+      console.log(res[0]);
       if(!res){
         console.log("Fail User doesn't match");
       }
