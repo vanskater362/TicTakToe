@@ -72,8 +72,8 @@ express()
       if(!res){
         response.json({success: false});
       }
-      /*else {
-        bcrypt.compare(password, result[0].password, function(err, res){
+      else {
+        /*bcrypt.compare(password, result[0].password, function(err, res){
           if(!res) {
             response.json({success: false});
           }
@@ -81,8 +81,9 @@ express()
             req.session.user = req.body.username;
             response.json({success: true});
           }
-        });
-      }*/
+        });*/
+        response.json({success: true});
+      }
     });
     client.release();  
   })

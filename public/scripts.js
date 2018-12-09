@@ -23,8 +23,6 @@ function register() {
 function p1login() {
 	var username = $("#player1").val();
    var password = $("#p1pass").val();
-   console.log(username);
-   console.log(password);
 
 	var params = {
 		username: username,
