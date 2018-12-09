@@ -68,6 +68,7 @@ express()
     const client = await pool.connect();
 
     client.query(sql, params, function(err, res){
+      console.log(res.rows);
       if(!res){
         console.log("Fail User doesn't match");
       }
@@ -82,7 +83,6 @@ express()
             response.json({success: true});
           }
         });*/
-        console.log(res.rows);
         console.log("Success!");
       }
     });
