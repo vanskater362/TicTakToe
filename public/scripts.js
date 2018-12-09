@@ -32,9 +32,9 @@ function p1login() {
 	$.post("/p1login", params, function(result) {
       
 		if (result && result.success) {
-			$("P1").text("Successfully logged in.");
+			$("P1").text(result.message);
 		} else {
-			$("P1").text("Error logging in.");
+			$("P1").text(result.message);
 		}
 	});
 }

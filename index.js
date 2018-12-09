@@ -69,18 +69,19 @@ express()
     client.query('SELECT password FROM players WHERE username = $1', [username], function(err, res){
       var hashedpass = res.rows[0].password;
       if(!res){
+        res = {success: false, message: "Login Error: User not found!"};
         console.log("Fail User doesn't match");
       }
       else {
         console.log(hashedpass);
         bcrypt.compare(password, hashedpass, function(err, ress){
           if(!ress) {
-            result = {success: false};
+            ress = {success: false, message: "Login Error: Password doesn't match!"};
             console.log("Fail: Password doesn't match");
           }
           else {
             req.session.user = req.body.username;
-            result = {success: true};
+            ress = {success: true, message: "Successful Login!"};
             console.log("Success!");
           }
         });
