@@ -39,7 +39,7 @@ express()
   .post('/register', async (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
-    var result = {success: 0};
+    var result = {success: false};
     
     var insertP = 'INSERT INTO players (username, password) VALUES($1,$2) RETURNING id';
     var insertR = 'INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,$1)';
@@ -47,17 +47,17 @@ express()
 
     bcrypt.hash(password, 10, function(err, hash){
       client.query(insertP, [username, hash], function(err, result){
-          if (typeof result.rows[0].id !== "undefined"){
+          if (!result){
+            regResult = {success: false};
+          } else {
             var playerid = result.rows[0].id;
             client.query(insertR, [playerid]);
-            regResult = {success: 1};
+            regResult = {success: true};
             client.release();
-          } else {
-            regResult = {success: 0};
           }
+          res.json(result);
       });
     });
-    res.json(result);
   })
   .get('/p1login', async (req, res) => {
     var username = req.body.player1;
@@ -68,6 +68,13 @@ express()
 
     await client.query(check, [username, password], function(err, res){
       bcrypt.compare(password, result[0].password, function(err, res){
+        if(!res) {
+          res.json({success: false});
+        }
+        else {
+          req.session.user = req.body.username;
+          res.json({success: true})
+        }
       });
     });
     client.release();  
