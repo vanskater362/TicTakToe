@@ -67,12 +67,11 @@ express()
     const client = await pool.connect();
 
     client.query('SELECT password FROM players WHERE username = $1', [username], function(err, res){
-      console.log(res.rows[0].password);
       if(!res){
         console.log("Fail User doesn't match");
       }
       else {
-        /*bcrypt.compare(req.body.password, res[0].password, function(err, res){
+        bcrypt.compare(req.body.password, res.rows[0].password, function(err, res){
           if(!res) {
             response.json({success: false});
             console.log("Fail: Password doesn't match");
@@ -80,9 +79,9 @@ express()
           else {
             req.session.user = req.body.username;
             response.json({success: true});
+            console.log("Success!");
           }
-        });*/
-        console.log("Success!");
+        });
       }
     });
     response.json(result);
