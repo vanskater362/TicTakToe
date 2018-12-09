@@ -62,13 +62,12 @@ express()
   .post('/p1login', async (req, response) => {
     var username = req.body.username;
     var password = req.body.password;
-    console.log(username);
-    console.log(password);
+    var params = [username, password];
     var result = {success: false};
-    var check = 'SELECT username, password FROM players WHERE username = $1::text';
+    var sql = 'SELECT username, password FROM players WHERE username = $1::text';
     const client = await pool.connect();
 
-    client.query(check, [username], function(err, res){
+    client.query(sql, params, function(err, res){
       if(!res){
         console.log("Fail User doesn't match");
       }
@@ -83,7 +82,7 @@ express()
             response.json({success: true});
           }
         });*/
-        console.log(res);
+        console.log(res.rows);
         console.log("Success!");
       }
     });
