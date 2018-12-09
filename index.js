@@ -84,7 +84,7 @@ express()
           }
         });*/
         result = {success: true};
-        console.log(res);
+        console.log(result);
         console.log("Success!");
       }
       response.json(result);
