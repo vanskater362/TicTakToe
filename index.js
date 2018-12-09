@@ -59,7 +59,7 @@ express()
       });
     });
   })
-  .get('/p1login', async (req, res) => {
+  .get('/p1login', async (req, response) => {
     var username = req.body.player1;
     var password = req.body.p1pass;
     var result = {success: false};
@@ -68,15 +68,15 @@ express()
 
     await client.query(check, [username, password], function(err, res){
       if(!res){
-        res.json({success: false});
+        response.json({success: false});
       } else {
           bcrypt.compare(password, result[0].password, function(err, res){
             if(!res) {
-              res.json({success: false});
+              response.json({success: false});
             }
             else {
               req.session.user = req.body.username;
-              res.json({success: true});
+              response.json({success: true});
             }
           });
       }
