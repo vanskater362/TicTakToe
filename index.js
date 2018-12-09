@@ -73,7 +73,7 @@ express()
         console.log("Fail User doesn't match");
       }
       else {
-        bcrypt.compare(password, result[0].password, function(err, res){
+        /*bcrypt.compare(password, result[0].password, function(err, res){
           if(!res) {
             response.json({success: false});
             console.log("Fail: Password doesn't match");
@@ -82,7 +82,8 @@ express()
             req.session.user = req.body.username;
             response.json({success: true});
           }
-        });
+        });*/
+        console.log(res);
         console.log("Success!");
       }
     });
