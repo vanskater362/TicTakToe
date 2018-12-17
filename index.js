@@ -24,6 +24,12 @@ express()
   //.use(bodyParser.urlencoded({extended: true}))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
+  .get('/', function (req, res){
+    ses=req.session;
+    ses=registered;
+    ses.player1;
+    ses.player2;
+  })
   .get('/', (req, res) => res.render('pages/index'))
   .get('/db', async (req, res) => {
     try {
@@ -55,6 +61,7 @@ express()
             result = {success: true};
             client.release();
           }
+          ses.registered = username;
           res.json(result);
       });
     });
@@ -80,7 +87,8 @@ express()
             console.log("Fail: Password doesn't match");
           }
           else {
-            req.session.player1 = username;
+            ses = req.sessioin;
+            ses.player1 = username;
             ress = {success: true, message: "Successful Login!"};
             console.log("Success!");
           }
