@@ -13,9 +13,9 @@ function register() {
 
 	$.post("/register", params, function(result) {
 		if (result && result.success) {
-			$("#Reg").text(ses.registered + " successfully registered.");
+			$("#Reg").text(result.username + " successfully registered.");
 		} else {
-			$("#Reg").text("Error registering.");
+			$("#Reg").text("Error registering" + result.username);
 		}
 	});
 }
