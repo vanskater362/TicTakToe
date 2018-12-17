@@ -87,7 +87,7 @@ express()
             console.log("Fail: Password doesn't match");
           }
           else {
-            ses = req.sessioin;
+            ses = req.session;
             ses.player1 = username;
             ress = {success: true, message: "Successful Login!"};
             console.log("Success!");

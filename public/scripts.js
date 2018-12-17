@@ -15,7 +15,7 @@ function register() {
 		if (result && result.success) {
 			$("#Reg").text(result.username + " successfully registered.");
 		} else {
-			$("#Reg").text("Error registering" + result.username);
+			$("#Reg").text("Error registering " + result.username);
 		}
 	});
 }
