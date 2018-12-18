@@ -155,11 +155,11 @@ express()
     
     const client = await pool.connect();
     client.query(getplayerID, [ses.player1], function (req, res) {
-      player1id = result.rows[0].id;
+      player1id = res.rows[0].id;
     });
 
     client.query(getplayerID, [ses.player2], function (req, res) {
-      player2id = result.rows[0].id;
+      player2id = res.rows[0].id;
     });
 
     if (draw == 1) {
