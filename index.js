@@ -26,7 +26,6 @@ express()
   .set('view engine', 'ejs')
   .get('/', function (req, res){
     ses=req.session;
-    ses=registered;
     ses.player1;
     ses.player2 = "computer";
   })
@@ -133,8 +132,8 @@ express()
   })
 
   .get('/getSessionData', function (req, res) {
-    res = {player1: ses.player1, player2: ses.player2}
-    res.json(res);
+    response = {player1: ses.player1, player2: ses.player2}
+    res.json(response);
   })
 
   .post('/getrecord', async (req, response) => {
