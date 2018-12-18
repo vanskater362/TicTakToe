@@ -90,7 +90,7 @@ function checkTie() {
 		}
 		declareWinner("Tie Game!")
 		var params = {draw: 1};
-		$.post("/updateRecord", params);
+		$.post("/updateRecord", params, function(result){});
 		return true;
 	}
 	return false;
