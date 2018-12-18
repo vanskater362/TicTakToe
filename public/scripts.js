@@ -31,11 +31,11 @@ function p1login() {
 
 	$.post("/p1login", params, function(result) {
       console.log(result);
-      $("p1").text(result.message);
+   
 		if (result && result.success) {
-			$("P1").text(result.message);
+			$("#P1").text(result.message);
 		} else {
-			$("P1").text(result.message);
+			$("#P1").text(result.message);
 		}
 	});
 }
