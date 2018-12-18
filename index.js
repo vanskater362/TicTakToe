@@ -152,14 +152,17 @@ express()
     var winnerID = 0;
     var loserID = 0;
     var draw = params.draw;
+    console.log(draw);
     
     const client = await pool.connect();
     client.query(getplayerID, [ses.player1], function (req, res) {
       player1id = res.rows[0].id;
+      console.log(player1id);
     });
 
     client.query(getplayerID, [ses.player2], function (req, res) {
       player2id = res.rows[0].id;
+      console.log(player1id);
     });
 
     if (draw == 1) {
