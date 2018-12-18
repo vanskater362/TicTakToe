@@ -140,7 +140,7 @@ express()
     var sql = 'SELECT wins, losses, draws, points FROM record WHERE playerid = $playerid;';
   })
 
-  .post('/updateRecord', async (req, response) => {
+  .post('/updateRecord', params, async (req, response) => {
 
     var updateWins = 'UPDATE record SET wins = wins + 1, points = points + 3 WHERE playerID = $1;';
     var updateLosses = 'UPDATE record SET losses = losses + 1 WHERE playerID = $1;';
