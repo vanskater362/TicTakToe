@@ -36,7 +36,7 @@ function p1login() {
 		if (result && result.success) {
 			$("#P1").text(result.message);
 			player1 = result.player1;
-			document.getElementById("game").style.visibility = visible;
+			document.getElementById("game").style.visibility = "visible";
 		} else {
 			$("#P1").text(result.message);
 		}
