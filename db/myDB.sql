@@ -21,5 +21,10 @@ INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,1), (
 INSERT INTO record (wins, losses, draws, points, playerID) VALUES (0,0,0,0,3);
 
 SELECT username, wins, losses, draws FROM players INNER JOIN record ON players.id = record.playerID;
+SELECT id FROM players WHERE username = 'tonyw';
 DELETE FROM record WHERE id > 3;
 DELETE FROM players WHERE id > 3;
+
+UPDATE record SET wins = wins + 1, points = points + 3 WHERE playerID = 3;
+UPDATE record SET losses = losses + 1 WHERE playerID = 3;
+UPDATE record SET draws = draws + 1, points = points + 1 WHERE playerID = 3;

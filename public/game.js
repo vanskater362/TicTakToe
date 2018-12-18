@@ -89,6 +89,8 @@ function checkTie() {
 			cells[i].removeEventListener('click', turnClick, false);
 		}
 		declareWinner("Tie Game!")
+		var params = {draw: 1};
+		$.post("/updateRecord", params);
 		return true;
 	}
 	return false;
