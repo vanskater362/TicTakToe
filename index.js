@@ -154,7 +154,7 @@ express()
     var draw = params.draw;
     console.log(draw);
     
-    const client = await pool.connect();
+    /*const client = await pool.connect();
     client.query(getplayerID, [ses.player1], function (req, res) {
       player1id = res.rows[0].id;
       console.log(player1id);
@@ -172,8 +172,8 @@ express()
       draw = 0;
     }
 
-    client.query(updateWins, [winnerID]);
-    client.query(updateLosses, [loserID]);
+    //client.query(updateWins, [winnerID]);
+    //client.query(updateLosses, [loserID]);*/
     
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
