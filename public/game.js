@@ -1,5 +1,7 @@
 var origBoard;
-const player1 = 'O';
+var player1;
+var player2;
+const huPlayer = 'O';
 const aiPlayer = 'X';
 const winCombos = [
 	[0, 1, 2],
@@ -16,6 +18,10 @@ const cells = document.querySelectorAll('.cell');
 startGame();
 
 function startGame() {
+	$.get('/getSessionData', function(results) {
+		player1 = results.player1;
+		player2 = results.player2;
+	});
 	document.querySelector(".endgame").style.display = "none";
 	origBoard = Array.from(Array(9).keys());
 	for (var i = 0; i < cells.length; i++) {
@@ -27,8 +33,8 @@ function startGame() {
 
 function turnClick(square) {
 	if (typeof origBoard[square.target.id] == 'number') {
-		turn(square.target.id, player1)
-		if (!checkWin(origBoard, player1) && !checkTie()) turn(bestSpot(), aiPlayer);
+		turn(square.target.id, huPlayer)
+		if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(bestSpot(), aiPlayer);
 	}
 }
 
@@ -55,12 +61,12 @@ function checkWin(board, player) {
 function gameOver(gameWon) {
 	for (let index of winCombos[gameWon.index]) {
 		document.getElementById(index).style.backgroundColor =
-			gameWon.player == player1 ? "blue" : "red";
+			gameWon.player == huPlayer ? "blue" : "red";
 	}
 	for (var i = 0; i < cells.length; i++) {
 		cells[i].removeEventListener('click', turnClick, false);
 	}
-	declareWinner(gameWon.player == player1 ? "You win!" : "You lose.");
+	declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
 }
 
 function declareWinner(who) {
@@ -91,7 +97,7 @@ function checkTie() {
 function minimax(newBoard, player) {
 	var availSpots = emptySquares();
 
-	if (checkWin(newBoard, player1)) {
+	if (checkWin(newBoard, huPlayer)) {
 		return {score: -10};
 	} else if (checkWin(newBoard, aiPlayer)) {
 		return {score: 10};
@@ -105,7 +111,7 @@ function minimax(newBoard, player) {
 		newBoard[availSpots[i]] = player;
 
 		if (player == aiPlayer) {
-			var result = minimax(newBoard, player1);
+			var result = minimax(newBoard, huPlayer);
 			move.score = result.score;
 		} else {
 			var result = minimax(newBoard, aiPlayer);

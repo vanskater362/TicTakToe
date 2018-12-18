@@ -2,6 +2,9 @@
    document.getElementById(id).style.visibility = "visible";
 }*/
 
+var player1;
+var player2;
+
 function register() {
 	var username = $("#username").val();
 	var password = $("#password").val();
@@ -30,10 +33,10 @@ function p1login() {
 	};
 
 	$.post("/p1login", params, function(result) {
-      console.log(result);
-   
 		if (result && result.success) {
 			$("#P1").text(result.message);
+			player1 = result.player1;
+			document.getElementById("game").style.visibility = visible;
 		} else {
 			$("#P1").text(result.message);
 		}
@@ -49,13 +52,11 @@ function p2login() {
 		password: password
 	};
 
-	$.post("/p2login", params, function(result) {
-      console.log(result);
-      
+	$.post("/p2login", params, function(result) {      
 		if (result && result.success) {
-			$("P2").text(result.message);
+			$("#P2").text(result.message);
 		} else {
-			$("P2").text(result.message);
+			$("#P2").text(result.message);
 		}
 	});
 }

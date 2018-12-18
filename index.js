@@ -28,7 +28,7 @@ express()
     ses=req.session;
     ses=registered;
     ses.player1;
-    ses.player2;
+    ses.player2 = "computer";
   })
   .get('/', (req, res) => res.render('pages/index'))
   .get('/db', async (req, res) => {
@@ -89,7 +89,7 @@ express()
           else {
             ses = req.session;
             ses.player1 = username;
-            ress = {success: true, message: "Successful Login!"};
+            ress = {success: true, message: "Successful Login!", player1: ses.player1};
             console.log("Success!");
           }
           response.json(ress);
@@ -120,8 +120,9 @@ express()
             console.log("Fail: Password doesn't match");
           }
           else {
-            req.session.player2 = username;
-            ress = {success: true, message: "Successful Login!"};
+            ses = req.session;
+            ses.player2 = username;
+            ress = {success: true, message: "Successful Login!", player2: ses.player2};
             console.log("Success!");
           }
           response.json(ress);
@@ -129,6 +130,11 @@ express()
       }
     });
     client.release();  
+  })
+
+  .get('/getSessionData', function (req, res) {
+    res = {player1: ses.player1, player2: ses.player2}
+    res.json(res);
   })
 
   .post('/getrecord', async (req, response) => {
