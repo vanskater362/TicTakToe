@@ -66,9 +66,11 @@ function turn(squareId, player) {
 
 	if (player == "O") {
 		console.log("Player one");
+		play++;
 	}
 	if (player == "X") {
 		console.log("Player Two");
+		play--;
 	}
 
 	//play++;
