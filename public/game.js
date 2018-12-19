@@ -43,17 +43,19 @@ function turnClick(square) {
 		}
 	} 
 	if (player2 != "computer") { // two player mode
-		if (typeof origBoard[square.target.id] == 'number') {
-			if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
-				console.log("in aiPlayer " + play);
-				turn(square.target.id, aiPlayer);
-				//play--;
-			}
-			if (!checkWin(origBoard, aiPlayer) && !checkTie() && play == 1) {
+		if (typeof origBoard[square.target.id] == 'number' && play == 1) {
+			if (!checkWin(origBoard, aiPlayer) && !checkTie() ) {
 				console.log("in huPlayer " + play);
 				turn(square.target.id, huPlayer);
 				play++;
 			}	
+		}
+		if (typeof origBoard[square.target.id] == 'number' && play == 2) {
+			if (!checkWin(origBoard, huPlayer) && !checkTie()) {
+				console.log("in aiPlayer " + play);
+				turn(square.target.id, aiPlayer);
+				play--;
+			}
 		}
 	}
 }
