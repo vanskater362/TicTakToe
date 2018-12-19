@@ -45,14 +45,14 @@ function turnClick(square) {
 	if (player2 != "computer") { // two player mode
 		if (typeof origBoard[square.target.id] == 'number') {
 
-			if (!checkWin(origBoard, aiPlayer) && !checkTie() && play == 1) {
+			if (!checkWin(origBoard, aiPlayer) && !checkTie()) {
 				console.log("in huPlayer " + play);
 				turn(square.target.id, huPlayer);
 			}
 			
-			if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
+			if (!checkWin(origBoard, huPlayer) && !checkTie()) {
 				console.log("in aiPlayer " + play);
-				turn(square.target.id, aiPlayer);
+				turn(bestSpot(), aiPlayer);
 			}
 		}
 	}
@@ -63,19 +63,6 @@ function turn(squareId, player) {
 	document.getElementById(squareId).innerText = player;
 	let gameWon = checkWin(origBoard, player)
 	if (gameWon) gameOver(gameWon)
-
-	if (player == "O") {
-		console.log("Player one");
-		document.getElementById(squareId).innerText = player;
-		play++;
-	}
-	if (player == "X") {
-		console.log("Player Two");
-		document.getElementById(squareId).innerText = player;
-		play--;
-	}
-
-	//play++;
 }
 
 function checkWin(board, player) {
@@ -132,7 +119,13 @@ function emptySquares() {
 }
 
 function bestSpot() {
-	return minimax(origBoard, aiPlayer).index;
+	if (player2 == "computer")
+		return minimax(origBoard, aiPlayer).index;
+	else {
+		for (var i = 0; i < cells.length; i++) {
+			return cells[i].addEventListener('click');
+		} 
+	}
 }
 
 function checkTie() {
