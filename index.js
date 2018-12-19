@@ -140,12 +140,31 @@ express()
     var sql = 'SELECT wins, losses, draws, points FROM record WHERE playerid = $playerid;';
   })
 
-  .post('/updateRecord', params, async (req, response) => {
+  .post('/updateDraw', function(req, res){
+    var updateDraws = 'UPDATE record SET draws = draws + 1, points = points + 1 WHERE playerID = $1;';
+    var getplayerID = 'SELECT id FROM players WHERE username = $1;';
+    console.log("in updateDraw");
+    /*const client = await pool.connect();
+    client.query(getplayerID, [ses.player1], function (req, res) {
+      player1id = res.rows[0].id;
+      console.log(player1id);
+    });
+  
+    client.query(getplayerID, [ses.player2], function (req, res) {
+      player2id = res.rows[0].id;
+      console.log(player1id);
+    });
+  
+    console.log("draw");
+    client.query(updateDraws, [player1id]);
+    client.query(updateDraws, [player2id]);*/
+    
+  })
+  
+  /*.post('/updateRecord', async (req, response) => {
 
     var updateWins = 'UPDATE record SET wins = wins + 1, points = points + 3 WHERE playerID = $1;';
     var updateLosses = 'UPDATE record SET losses = losses + 1 WHERE playerID = $1;';
-    var updateDraws = 'UPDATE record SET draws = draws + 1, points = points + 1 WHERE playerID = $1;';
-    var getplayerID = 'SELECT id FROM players WHERE username = $1;';
     var player1id;
     var player2id;
     
@@ -154,26 +173,9 @@ express()
     var draw = params.draw;
     console.log(draw);
     
-    /*const client = await pool.connect();
-    client.query(getplayerID, [ses.player1], function (req, res) {
-      player1id = res.rows[0].id;
-      console.log(player1id);
-    });
-
-    client.query(getplayerID, [ses.player2], function (req, res) {
-      player2id = res.rows[0].id;
-      console.log(player1id);
-    });
-
-    if (draw == 1) {
-      console.log("draw");
-      client.query(updateDraws, [player1id]);
-      client.query(updateDraws, [player2id]);
-      draw = 0;
-    }
 
     //client.query(updateWins, [winnerID]);
-    //client.query(updateLosses, [loserID]);*/
+    //client.query(updateLosses, [loserID]);
     
-  })
+  })*/
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

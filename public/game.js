@@ -88,9 +88,9 @@ function checkTie() {
 			cells[i].style.backgroundColor = "green";
 			cells[i].removeEventListener('click', turnClick, false);
 		}
-		declareWinner("Tie Game!")
-		var params = {draw: 1};
-		$.post("/updateRecord", params, function(result){});
+		$.post("/updateDraw", function(result){
+			declareWinner("Tie Game!")
+		});
 		return true;
 	}
 	return false;
