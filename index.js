@@ -156,7 +156,7 @@ express()
     
     client.query(getplayerID, [ses.player2], function (req, res2) {
       player2id = res2.rows[0].id;
-      client.query(updateDraws, [player2id], function (req, res4) {
+      client.query(updateDraws, [player2id]);
       console.log(player2id);
     });
     
