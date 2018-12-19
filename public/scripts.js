@@ -36,7 +36,7 @@ function p1login() {
 		if (result && result.success) {
 			$("#P1").text(result.message);
 			player1 = result.player1;
-			document.getElementById("1game").style.visibility = "visible";
+			document.getElementById("game").style.visibility = "visible";
 		} else {
 			$("#P1").text(result.message);
 		}
@@ -56,8 +56,7 @@ function p2login() {
 		if (result && result.success) {
 			$("#P2").text(result.message);
 			player2 = result.player2;
-			document.getElementById("1game").style.visibility = "hidden";
-			document.getElementById("2game").style.visibility = "visible";
+			document.getElementById("game").text = "Start Two Player Game";
 		} else {
 			$("#P2").text(result.message);
 		}
