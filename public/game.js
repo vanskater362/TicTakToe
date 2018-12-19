@@ -52,13 +52,6 @@ function checkWin(board, player) {
 	for (let [index, win] of winCombos.entries()) {
 		if (win.every(elem => plays.indexOf(elem) > -1)) {
 			gameWon = {index: index, player: player};
-			/*if (player == aiPlayer) {
-				$.post("/aiWin");
-				$.post("/p1Lose");
-			} else {
-				$.post("/p1win");
-				$.post("/aiLose");
-			}*/
 			break;
 		}
 	}
@@ -72,6 +65,14 @@ function gameOver(gameWon) {
 	}
 	for (var i = 0; i < cells.length; i++) {
 		cells[i].removeEventListener('click', turnClick, false);
+	}
+	if (gameWon.player == aiPlayer) {
+		$.post("/aiWin");
+		$.post("/p1Lose");
+	} 
+	if (gameWon.player == huPlayer) {
+		$.post("/p1win");
+		$.post("/aiLose");
 	}
 	declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
 }
