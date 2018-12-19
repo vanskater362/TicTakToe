@@ -45,16 +45,25 @@ function turnClick(square) {
 	if (player2 != "computer") { // two player mode
 		if (typeof origBoard[square.target.id] == 'number') {
 
-			if (!checkWin(origBoard, aiPlayer) && !checkTie() && play == 1) {
+			if (!checkWin(origBoard, aiPlayer) && !checkTie()) {
 				console.log("in huPlayer " + play);
 				turn(square.target.id, huPlayer);
+				turnClick2();
 			}
 			
-			if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
+			/*if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
 				console.log("in aiPlayer " + play);
 				turn(bestSpot(), aiPlayer);
-			}
+			}*/
 		}
+	}
+}
+
+function turnClick2 (square) {
+	if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
+		console.log("in aiPlayer " + play);
+		turn(square.target.id, aiPlayer);
+		turnClick();
 	}
 }
 
@@ -119,19 +128,7 @@ function emptySquares() {
 }
 
 function bestSpot() {
-	if (player2 == "computer")
-		return minimax(origBoard, aiPlayer).index;
-	else {
-		for (var i = 0; i < cells.length; i++) {
-			cells[i].addEventListener('click', getindex, false);
-		} 
-	}
-}
-
-function getindex(square) {
-	play = 2;
-	turn(square.target.id, aiPlayer);
-	play = 1;
+	return minimax(origBoard, aiPlayer).index;
 }
 
 function checkTie() {
