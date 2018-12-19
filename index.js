@@ -159,12 +159,16 @@ express()
       console.log(player2id);
     });
   
-    client.query(updateDraws, [player1id], function (req, res3) {
-      console.log(res3.rows);
+    client.query(updateDraws, [player1id], (err, res3) => {
+      if (err) {
+        console.log(err.stack);
+      } else {
+        console.log(res3.rows[0]);
+      }
     });
-    client.query(updateDraws, [player2id], function (req, res4) {
+    /*client.query(updateDraws, [player2id], function (req, res4) {
       console.log(res4.rows);
-    });
+    });*/
     client.release();
     var result = {success: true};
     res.json(result);
