@@ -29,12 +29,7 @@ function startGame() {
 	for (var i = 0; i < cells.length; i++) {
 		cells[i].innerText = '';
 		cells[i].style.removeProperty('background-color');
-		if(play == 1){
-			cells[i].addEventListener('click', turnClick, false);
-		}
-		if(play == 2){
-			cells[i].addEventListener('click', turnClick2, false);
-		}
+		cells[i].addEventListener('click', turnClick, false);
 	}
 }
 
@@ -49,10 +44,9 @@ function turnClick(square) {
 	} 
 	if (player2 != "computer") { // two player mode
 		if (typeof origBoard[square.target.id] == 'number') {
-
 			if (!checkWin(origBoard, aiPlayer) && !checkTie()) {
 				console.log("in huPlayer " + play);
-				turn(square.target.id, huPlayer);
+				turn(square.target.id, aiPlayer);
 				play++;
 			}
 			
