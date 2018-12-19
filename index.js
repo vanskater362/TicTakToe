@@ -88,6 +88,7 @@ express()
           else {
             ses = req.session;
             ses.player1 = username;
+            ses.player2 = "computer";
             ress = {success: true, message: "Successful Login!", player1: ses.player1};
             console.log("Success!");
           }
