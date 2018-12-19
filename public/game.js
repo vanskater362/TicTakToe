@@ -46,8 +46,14 @@ function turnClick(square) {
 		if (typeof origBoard[square.target.id] == 'number') {
 			if (!checkWin(origBoard, aiPlayer) && !checkTie()) {
 				console.log("in huPlayer " + play);
-				turn(square.target.id, aiPlayer);
-				play++;
+				if(play == 2) {
+					turn(square.target.id, aiPlayer);
+					play--;
+				}
+				if(play == 1){
+					turn(square.target.id, huPlayer);
+					play++;
+				}
 			}
 			
 			/*if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
