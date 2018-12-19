@@ -66,10 +66,12 @@ function turn(squareId, player) {
 
 	if (player == "O") {
 		console.log("Player one");
+		document.getElementById(squareId).innerText = player;
 		play++;
 	}
 	if (player == "X") {
 		console.log("Player Two");
+		document.getElementById(squareId).innerText = player;
 		play--;
 	}
 
