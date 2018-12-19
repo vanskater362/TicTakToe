@@ -123,7 +123,7 @@ function bestSpot() {
 		return minimax(origBoard, aiPlayer).index;
 	else {
 		for (var i = 0; i < cells.length; i++) {
-			return cells[i].addEventListener('click');
+			return cells[i].addEventListener('click', i);
 		} 
 	}
 }
