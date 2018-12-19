@@ -47,7 +47,7 @@ function turnClick(square) {
 
 			if (!checkWin(origBoard, aiPlayer) && !checkTie()) {
 				turn(square.target.id, huPlayer);
-				turn(square.target.id, aiPlayer);
+				//turn(square.target.id, aiPlayer);
 			}
 	
 			/*if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
