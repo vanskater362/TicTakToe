@@ -26,10 +26,19 @@ function startGame() {
 	play = 1;
 	document.querySelector(".endgame").style.display = "none";
 	origBoard = Array.from(Array(9).keys());
-	for (var i = 0; i < cells.length; i++) {
-		cells[i].innerText = '';
-		cells[i].style.removeProperty('background-color');
-		cells[i].addEventListener('click', turnClick, false);
+	if(play == 1){
+		for (var i = 0; i < cells.length; i++) {
+			cells[i].innerText = '';
+			cells[i].style.removeProperty('background-color');
+			cells[i].addEventListener('click', turnClick, false);
+		}
+	}
+	if(play == 2){
+		for (var i = 0; i < cells.length; i++) {
+			cells[i].innerText = '';
+			cells[i].style.removeProperty('background-color');
+			cells[i].addEventListener('click', turnClick2, false);
+		}
 	}
 }
 
@@ -48,7 +57,7 @@ function turnClick(square) {
 			if (!checkWin(origBoard, aiPlayer) && !checkTie()) {
 				console.log("in huPlayer " + play);
 				turn(square.target.id, huPlayer);
-				turnClick2();
+				play++;
 			}
 			
 			/*if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
@@ -63,7 +72,7 @@ function turnClick2 (square) {
 	if (!checkWin(origBoard, huPlayer) && !checkTie()) {
 		console.log("in aiPlayer " + play);
 		turn(square.target.id, aiPlayer);
-		turnClick();
+		play--;
 	}
 }
 
