@@ -29,13 +29,13 @@ function startGame() {
 	for (var i = 0; i < cells.length; i++) {
 		cells[i].innerText = '';
 		cells[i].style.removeProperty('background-color');
+		if(play == 1){
+			cells[i].addEventListener('click', turnClick, false);
+		}
+		if(play == 2){
+			cells[i].addEventListener('click', turnClick2, false);
+		}
 	}
-			if(play == 1){
-				cells[i].addEventListener('click', turnClick, false);
-			}
-			if(play == 2){
-				cells[i].addEventListener('click', turnClick2, false);
-			}
 }
 
 function turnClick(square) {
