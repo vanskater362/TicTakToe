@@ -143,7 +143,10 @@ express()
   .post('/updateDraw', async (req, res) => {
     var updateDraws = 'UPDATE record SET draws = draws + 1, points = points + 1 WHERE playerID = $1;';
     var getplayerID = 'SELECT id FROM players WHERE username = $1;';
+    var player1id;
+    var player2id;
     console.log(ses.player1);
+    
     const client = await pool.connect();
     client.query(getplayerID, [ses.player1], function (req, res1) {
       player1id = res1.rows[0].id;
@@ -165,8 +168,6 @@ express()
 
     var updateWins = 'UPDATE record SET wins = wins + 1, points = points + 3 WHERE playerID = $1;';
     var updateLosses = 'UPDATE record SET losses = losses + 1 WHERE playerID = $1;';
-    var player1id;
-    var player2id;
     
     var winnerID = 0;
     var loserID = 0;
