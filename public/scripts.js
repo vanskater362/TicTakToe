@@ -56,7 +56,7 @@ function p2login() {
 		if (result && result.success) {
 			$("#P2").text(result.message);
 			player2 = result.player2;
-			document.getElementById("game").text = "Start Two Player Game";
+			document.getElementById("game").innerHTML = <h2><a href="game.html">Start One Player Game</a></h2>;
 		} else {
 			$("#P2").text(result.message);
 		}
