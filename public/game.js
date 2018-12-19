@@ -29,7 +29,6 @@ function startGame() {
 	for (var i = 0; i < cells.length; i++) {
 		cells[i].innerText = '';
 		cells[i].style.removeProperty('background-color');
-		console.log(play);
 		cells[i].addEventListener('click', turnClick, false);
 	}
 }
@@ -38,21 +37,20 @@ function turnClick(square) {
 	if (player2 == "computer"){ // one player mode
 		if (typeof origBoard[square.target.id] == 'number') {
 			turn(square.target.id, huPlayer)
-			play = 2;
+
 			if (!checkWin(origBoard, huPlayer) && !checkTie()) {
 				turn(bestSpot(), aiPlayer);
-				play = 1;
 			}	
 		}
 	} else { // two player mode
-		if (typeof origBoard[square.target.id] == 'number') {
+		//if (typeof origBoard[square.target.id] == 'number') {
 			turn(square.target.id, huPlayer)
-			play = 2;
+
 			if (!checkWin(origBoard, huPlayer) && !checkTie()) {
 				turn(square.target.id, aiPlayer);
-				play = 1;
+
 			}
-		}
+		//}
 	}
 }
 
