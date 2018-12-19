@@ -44,7 +44,7 @@ function turnClick(square) {
 	} 
 	if (player2 != "computer") { // two player mode
 		if (typeof origBoard[square.target.id] == 'number') {
-			if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 1) {
+			if (!checkWin(origBoard, aiPlayer) && !checkTie() && play == 1) {
 				turn(square.target.id, huPlayer);
 			}
 			if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
@@ -62,8 +62,10 @@ function turn(squareId, player) {
 
 	if (play == 1) {
 		play = 2;
+		console.log(play);
 	} if (play == 2) {
 		play = 1;
+		console.log(play);
 	}
 }
 
