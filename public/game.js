@@ -33,9 +33,16 @@ function startGame() {
 }
 
 function turnClick(square) {
-	if (typeof origBoard[square.target.id] == 'number') {
-		turn(square.target.id, huPlayer)
-		if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(bestSpot(), aiPlayer);
+	if (player2 == "computer"){ // one player mode
+		if (typeof origBoard[square.target.id] == 'number') {
+			turn(square.target.id, huPlayer)
+			if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(bestSpot(), aiPlayer);
+		}
+	} else { // two player mode
+		if (typeof origBoard[square.target.id] == 'number') {
+			turn(square.target.id, huPlayer)
+			if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(square.target.id, aiPlayer);
+		}
 	}
 }
 
@@ -67,13 +74,25 @@ function gameOver(gameWon) {
 	for (var i = 0; i < cells.length; i++) {
 		cells[i].removeEventListener('click', turnClick, false);
 	}
-	if (gameWon.player == aiPlayer) {
-		$.post("/aiWin");
-		$.post("/p1Lose");
-	} 
-	if (gameWon.player == huPlayer) {
-		$.post("/p1win");
-		$.post("/aiLose");
+	if (player2 == "computer") {
+		if (gameWon.player == aiPlayer) {
+			$.post("/aiWin");
+			$.post("/p1Lose");
+		} 
+		if (gameWon.player == huPlayer) {
+			$.post("/p1win");
+			$.post("/aiLose");
+		}
+	} else {
+		//aiPlayer is player 2
+		if (gameWon.player == huPlayer) {
+			$.post("/p1Win");
+			$.post("/p2Lose");
+		} 
+		if (gameWon.player == aiPlayer) {
+			$.post("/p2win");
+			$.post("/p1Lose");
+		}
 	}
 	declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
 }
