@@ -44,12 +44,12 @@ function turnClick(square) {
 	} 
 	if (player2 != "computer") { // two player mode
 		if (typeof origBoard[square.target.id] == 'number') {
-			console.log(play);
-			if (!checkWin(origBoard, aiPlayer) && !checkTie() && play%2 == 1) {
+
+			if (!checkWin(origBoard, aiPlayer) && !checkTie() && play == 1) {
 				turn(square.target.id, huPlayer);
 			}
-			console.log(play);
-			if (!checkWin(origBoard, huPlayer) && !checkTie() && play%2 == 0) {
+	
+			if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
 				turn(square.target.id, aiPlayer);
 
 			}
