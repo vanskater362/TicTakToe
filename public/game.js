@@ -26,17 +26,13 @@ function startGame() {
 	play = 1;
 	document.querySelector(".endgame").style.display = "none";
 	origBoard = Array.from(Array(9).keys());
-	if(play == 1){
-		for (var i = 0; i < cells.length; i++) {
-			cells[i].innerText = '';
-			cells[i].style.removeProperty('background-color');
+	for (var i = 0; i < cells.length; i++) {
+		cells[i].innerText = '';
+		cells[i].style.removeProperty('background-color');
+		if(play == 1){
 			cells[i].addEventListener('click', turnClick, false);
 		}
-	}
-	if(play == 2){
-		for (var i = 0; i < cells.length; i++) {
-			cells[i].innerText = '';
-			cells[i].style.removeProperty('background-color');
+		if(play == 2){
 			cells[i].addEventListener('click', turnClick2, false);
 		}
 	}
