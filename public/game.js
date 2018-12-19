@@ -123,13 +123,13 @@ function bestSpot() {
 		return minimax(origBoard, aiPlayer).index;
 	else {
 		for (var i = 0; i < cells.length; i++) {
-			return cells[i].addEventListener('click', getindex, false);
+			cells[i].addEventListener('click', getindex, false);
 		} 
 	}
 }
 
 function getindex(square) {
-	return square.target.id;
+	turn(square.target.id, aiPlayer);
 }
 
 function checkTie() {
