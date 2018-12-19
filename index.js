@@ -159,11 +159,41 @@ express()
       client.query(updateDraws, [player2id]);
       console.log(player2id);
     });
+
+    client.release();
+    var result = {success: true};
+    res.json(result);
     
-    /*console.log("player1id: " + player1id);
+  })
+
+  .post('/aiWin', async (req, res) => {
+    var updateWins = 'UPDATE record SET wins = wins + 1, points = points + 3 WHERE playerID = $1';
+    var getplayerID = 'SELECT id FROM players WHERE username = $1';
+    var player2id;
+    
+    const client = await pool.connect();
+    client.query(getplayerID, [ses.player2], function (req, res1) {
+      player2id = res1.rows[0].id;
+      client.query(updateWins, [player2id]);
     });
-      console.log(res4.rows);
-    });*/
+
+    client.release();
+    var result = {success: true};
+    res.json(result);
+    
+  })
+
+  .post('/p1Lose', async (req, res) => {
+    var updateLosses = 'UPDATE record SET losses = losses + 1 WHERE playerID = $1';
+    var getplayerID = 'SELECT id FROM players WHERE username = $1';
+    var player1id;
+    
+    const client = await pool.connect();
+    client.query(getplayerID, [ses.player1], function (req, res1) {
+      player1id = res1.rows[0].id;
+      client.query(updateLosses, [player1id]);
+    });
+
     client.release();
     var result = {success: true};
     res.json(result);
@@ -172,8 +202,8 @@ express()
   
   /*.post('/updateRecord', async (req, response) => {
 
-    var updateWins = 'UPDATE record SET wins = wins + 1, points = points + 3 WHERE playerID = $1;';
-    var updateLosses = 'UPDATE record SET losses = losses + 1 WHERE playerID = $1;';
+    var updateWins = 'UPDATE record SET wins = wins + 1, points = points + 3 WHERE playerID = $1';
+    var updateLosses = 'UPDATE record SET losses = losses + 1 WHERE playerID = $1';
     
     var winnerID = 0;
     var loserID = 0;
