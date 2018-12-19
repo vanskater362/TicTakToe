@@ -33,10 +33,15 @@ function startGame() {
 }
 
 function turnClick(square) {
+	var play;
 	if (player2 == "computer"){ // one player mode
 		if (typeof origBoard[square.target.id] == 'number') {
+			play = 1;
 			turn(square.target.id, huPlayer)
+			console.log(play);
 			if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(bestSpot(), aiPlayer);
+			play = 2;
+			console.log(play);
 		}
 	} else { // two player mode
 		if (typeof origBoard[square.target.id] == 'number') {
@@ -94,7 +99,7 @@ function gameOver(gameWon) {
 			$.post("/p1Lose");
 		}
 	}
-	declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
+	declareWinner(gameWon.player == huPlayer ? "Player One Wins!" : "Player Two Wins!");
 }
 
 function declareWinner(who) {
