@@ -60,7 +60,7 @@ function turnClick(square) {
 }
 
 function turnClick2 (square) {
-	if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
+	if (!checkWin(origBoard, huPlayer) && !checkTie()) {
 		console.log("in aiPlayer " + play);
 		turn(square.target.id, aiPlayer);
 		turnClick();
