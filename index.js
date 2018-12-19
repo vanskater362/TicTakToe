@@ -140,11 +140,11 @@ express()
     var sql = 'SELECT wins, losses, draws, points FROM record WHERE playerid = $playerid;';
   })
 
-  .post('/updateDraw', function(req, res){
+  .post('/updateDraw', async (req, res) => {
     var updateDraws = 'UPDATE record SET draws = draws + 1, points = points + 1 WHERE playerID = $1;';
     var getplayerID = 'SELECT id FROM players WHERE username = $1;';
     console.log("in updateDraw");
-    const client = pool.connect();
+    const client = await pool.connect();
     client.query(getplayerID, [ses.player1], function (req, res) {
       player1id = res.rows[0].id;
       console.log(player1id);
