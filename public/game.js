@@ -43,14 +43,14 @@ function turnClick(square) {
 		}
 	} 
 	if (player2 != "computer") { // two player mode
-		if (typeof origBoard[square.target.id] == 'number' && play == 1 && !checkTie()) {
-			//if (!checkWin(origBoard, huPlayer) && !checkTie() ) {
+		if (typeof origBoard[square.target.id] == 'number' && play == 1 ) {
+			if (!checkWin(origBoard, huPlayer) && !checkTie() ) {
 				turn(square.target.id, huPlayer);
 				play++;
-			//}	
+			}	
 		}
-		if (typeof origBoard[square.target.id] == 'number' && play == 2 && !checkTie()) {
-			if (!checkWin(origBoard, aiPlayer)) {
+		if (typeof origBoard[square.target.id] == 'number' && play == 2 ) {
+			if (!checkWin(origBoard, aiPlayer) && !checkTie()) {
 				turn(square.target.id, aiPlayer);
 				play--;
 			}
