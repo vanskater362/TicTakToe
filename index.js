@@ -132,6 +132,7 @@ express()
   })
 
   .get('/getSessionData', function (req, res) {
+    console.log(ses.player2);
     response = {player1: ses.player1, player2: ses.player2}
     res.json(response);
   })
@@ -145,7 +146,7 @@ express()
     var getplayerID = 'SELECT id FROM players WHERE username = $1';
     var player1id;
     var player2id;
-    console.log(ses.player1);
+    console.log(ses.player2);
     
     const client = await pool.connect();
     client.query(getplayerID, [ses.player1], function (req, res1) {
