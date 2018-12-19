@@ -1,7 +1,7 @@
 var origBoard;
 var player1;
 var player2;
-var play = 1;
+var play;
 const huPlayer = 'O';
 const aiPlayer = 'X';
 const winCombos = [
@@ -22,8 +22,8 @@ function startGame() {
 	$.get('/getSessionData', function(results) {
 		player1 = results.player1;
 		player2 = results.player2;
-		console.log(player2);
 	});
+	play = 1;
 	document.querySelector(".endgame").style.display = "none";
 	origBoard = Array.from(Array(9).keys());
 	for (var i = 0; i < cells.length; i++) {
@@ -45,12 +45,13 @@ function turnClick(square) {
 	if (player2 != "computer") { // two player mode
 		if (typeof origBoard[square.target.id] == 'number') {
 			console.log(play);
-			if (!checkWin(origBoard, aiPlayer) && !checkTie() && play == 1) {
+			if (!checkWin(origBoard, aiPlayer) && !checkTie() && play%2 == 1) {
 				turn(square.target.id, huPlayer);
 			}
 			console.log(play);
-			if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
+			if (!checkWin(origBoard, huPlayer) && !checkTie() && play%2 == 0) {
 				turn(square.target.id, aiPlayer);
+
 			}
 		}
 	}
@@ -63,10 +64,6 @@ function turn(squareId, player) {
 	if (gameWon) gameOver(gameWon)
 
 	play++;
-
-	if (play == 2) {
-		play = 1;
-	}
 }
 
 function checkWin(board, player) {
