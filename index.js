@@ -137,12 +137,12 @@ express()
   })
 
   .post('/getrecord', async (req, response) => {
-    var sql = 'SELECT wins, losses, draws, points FROM record WHERE playerid = $playerid;';
+    var sql = 'SELECT wins, losses, draws, points FROM record WHERE playerid = $playerid';
   })
 
   .post('/updateDraw', async (req, res) => {
-    var updateDraws = 'UPDATE record SET draws = draws + 1, points = points + 1 WHERE playerID = $1;';
-    var getplayerID = 'SELECT id FROM players WHERE username = $1;';
+    var updateDraws = 'UPDATE record SET draws = draws + 1, points = points + 1 WHERE playerID = $1';
+    var getplayerID = 'SELECT id FROM players WHERE username = $1';
     var player1id;
     var player2id;
     console.log(ses.player1);
