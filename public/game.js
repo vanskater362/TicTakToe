@@ -52,13 +52,13 @@ function checkWin(board, player) {
 	for (let [index, win] of winCombos.entries()) {
 		if (win.every(elem => plays.indexOf(elem) > -1)) {
 			gameWon = {index: index, player: player};
-			if (player == aiPlayer) {
+			/*if (player == aiPlayer) {
 				$.post("/aiWin");
 				$.post("/p1Lose");
 			} else {
 				$.post("/p1win");
 				$.post("/aiLose");
-			}
+			}*/
 			break;
 		}
 	}
