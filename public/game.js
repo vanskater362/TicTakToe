@@ -45,8 +45,12 @@ function turnClick(square) {
 		}
 	} else { // two player mode
 		if (typeof origBoard[square.target.id] == 'number') {
+			play = 1;
 			turn(square.target.id, huPlayer)
+			console.log(play);
 			if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(square.target.id, aiPlayer);
+			play = 2;
+			console.log(play);
 		}
 	}
 }
