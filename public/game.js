@@ -21,6 +21,7 @@ function startGame() {
 	$.get('/getSessionData', function(results) {
 		player1 = results.player1;
 		player2 = results.player2;
+		console.log(player2);
 	});
 	document.querySelector(".endgame").style.display = "none";
 	origBoard = Array.from(Array(9).keys());
