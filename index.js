@@ -150,23 +150,18 @@ express()
     const client = await pool.connect();
     client.query(getplayerID, [ses.player1], function (req, res1) {
       player1id = res1.rows[0].id;
+      client.query(updateDraws, [player1id]);
       console.log(player1id);
     });
     
     client.query(getplayerID, [ses.player2], function (req, res2) {
       player2id = res2.rows[0].id;
+      client.query(updateDraws, [player2id], function (req, res4) {
       console.log(player2id);
     });
     
-    console.log("player1id: " + player1id);
-    client.query(updateDraws, [player1id], (err, res3) => {
-      if (err) {
-        console.log("error: " + err.stack);
-      } else {
-        console.log("sucess" + res3.rows[0]);
-      }
+    /*console.log("player1id: " + player1id);
     });
-    /*client.query(updateDraws, [player2id], function (req, res4) {
       console.log(res4.rows);
     });*/
     client.release();
