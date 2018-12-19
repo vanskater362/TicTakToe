@@ -144,7 +144,7 @@ express()
     var updateDraws = 'UPDATE record SET draws = draws + 1, points = points + 1 WHERE playerID = $1;';
     var getplayerID = 'SELECT id FROM players WHERE username = $1;';
     console.log("in updateDraw");
-    const client = await pool.connect();
+    const client = pool.connect();
     client.query(getplayerID, [ses.player1], function (req, res) {
       player1id = res.rows[0].id;
       console.log(player1id);
