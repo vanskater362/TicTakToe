@@ -1,6 +1,7 @@
 var origBoard;
 var player1;
 var player2;
+var play = 1;
 const huPlayer = 'O';
 const aiPlayer = 'X';
 const winCombos = [
@@ -28,29 +29,29 @@ function startGame() {
 	for (var i = 0; i < cells.length; i++) {
 		cells[i].innerText = '';
 		cells[i].style.removeProperty('background-color');
+		console.log(play);
 		cells[i].addEventListener('click', turnClick, false);
 	}
 }
 
 function turnClick(square) {
-	var play;
 	if (player2 == "computer"){ // one player mode
 		if (typeof origBoard[square.target.id] == 'number') {
-			play = 1;
 			turn(square.target.id, huPlayer)
-			console.log(play);
-			if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(bestSpot(), aiPlayer);
 			play = 2;
-			console.log(play);
+			if (!checkWin(origBoard, huPlayer) && !checkTie()) {
+				turn(bestSpot(), aiPlayer);
+				play = 1;
+			}	
 		}
 	} else { // two player mode
 		if (typeof origBoard[square.target.id] == 'number') {
-			play = 1;
 			turn(square.target.id, huPlayer)
-			console.log(play);
-			if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(square.target.id, aiPlayer);
 			play = 2;
-			console.log(play);
+			if (!checkWin(origBoard, huPlayer) && !checkTie()) {
+				turn(square.target.id, aiPlayer);
+				play = 1;
+			}
 		}
 	}
 }
