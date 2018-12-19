@@ -44,14 +44,14 @@ function turnClick(square) {
 	} 
 	if (player2 != "computer") { // two player mode
 		if (typeof origBoard[square.target.id] == 'number' && play == 1) {
-			if (!checkWin(origBoard, aiPlayer) && !checkTie() ) {
+			if (!checkWin(origBoard, huPlayer) && !checkTie() ) {
 				console.log("in huPlayer " + play);
 				turn(square.target.id, huPlayer);
 				play++;
 			}	
 		}
 		if (typeof origBoard[square.target.id] == 'number' && play == 2) {
-			if (!checkWin(origBoard, huPlayer) && !checkTie()) {
+			if (!checkWin(origBoard, aiPlayer) && !checkTie()) {
 				console.log("in aiPlayer " + play);
 				turn(square.target.id, aiPlayer);
 				play--;
@@ -60,15 +60,8 @@ function turnClick(square) {
 	}
 }
 
-function turnClick2 (square) {
-	if (!checkWin(origBoard, huPlayer) && !checkTie()) {
-		console.log("in aiPlayer " + play);
-		turn(square.target.id, aiPlayer);
-		play--;
-	}
-}
-
 function turn(squareId, player) {
+	chechTie();
 	origBoard[squareId] = player;
 	document.getElementById(squareId).innerText = player;
 	let gameWon = checkWin(origBoard, player)
