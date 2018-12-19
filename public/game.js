@@ -47,7 +47,7 @@ function turnClick(square) {
 			if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
 				console.log("in aiPlayer " + play);
 				turn(square.target.id, aiPlayer);
-				play--;
+				//play--;
 			}
 			if (!checkWin(origBoard, aiPlayer) && !checkTie() && play == 1) {
 				console.log("in huPlayer " + play);
