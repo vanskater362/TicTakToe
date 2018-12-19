@@ -44,8 +44,10 @@ function turnClick(square) {
 	} 
 	if (player2 != "computer") { // two player mode
 		if (typeof origBoard[square.target.id] == 'number') {
-			turn(square.target.id, huPlayer);
-			if (!checkWin(origBoard, huPlayer) && !checkTie()) {
+			if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 1) {
+				turn(square.target.id, huPlayer);
+			}
+			if (!checkWin(origBoard, huPlayer) && !checkTie() && play == 2) {
 				turn(square.target.id, aiPlayer);
 			}
 		}
@@ -57,6 +59,12 @@ function turn(squareId, player) {
 	document.getElementById(squareId).innerText = player;
 	let gameWon = checkWin(origBoard, player)
 	if (gameWon) gameOver(gameWon)
+
+	if (play == 1) {
+		play = 2;
+	} if (play == 2) {
+		play = 1;
+	}
 }
 
 function checkWin(board, player) {
