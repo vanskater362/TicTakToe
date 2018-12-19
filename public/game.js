@@ -36,21 +36,19 @@ function startGame() {
 function turnClick(square) {
 	if (player2 == "computer"){ // one player mode
 		if (typeof origBoard[square.target.id] == 'number') {
-			turn(square.target.id, huPlayer)
-
+			turn(square.target.id, huPlayer);
 			if (!checkWin(origBoard, huPlayer) && !checkTie()) {
 				turn(bestSpot(), aiPlayer);
 			}	
 		}
-	} else { // two player mode
-		//if (typeof origBoard[square.target.id] == 'number') {
-			turn(square.target.id, huPlayer)
-
+	} 
+	if (player2 != "computer") { // two player mode
+		if (typeof origBoard[square.target.id] == 'number') {
+			turn(square.target.id, huPlayer);
 			if (!checkWin(origBoard, huPlayer) && !checkTie()) {
 				turn(square.target.id, aiPlayer);
-
 			}
-		//}
+		}
 	}
 }
 
