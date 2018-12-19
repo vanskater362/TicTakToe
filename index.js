@@ -133,7 +133,6 @@ express()
   })
 
   .get('/getSessionData', function (req, res) {
-    console.log(ses.player2);
     response = {player1: ses.player1, player2: ses.player2}
     res.json(response);
   })
@@ -157,12 +156,18 @@ express()
   
     client.query(getplayerID, [ses.player2], function (req, res2) {
       player2id = res2.rows[0].id;
-      console.log(player1id);
+      console.log(player2id);
     });
   
-    client.query(updateDraws, [player1id]);
-    client.query(updateDraws, [player2id]);
+    client.query(updateDraws, [player1id], function (req, res3) {
+      console.log(res3.rows);
+    });
+    client.query(updateDraws, [player2id], function (req, res4) {
+      console.log(res4.rows);
+    });
     client.release();
+    var result = {success: true};
+    res.json(result);
     
   })
   
