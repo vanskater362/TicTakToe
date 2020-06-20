@@ -3,3 +3,5 @@ A Simple CRUD web app that allows users to register an account to keep track of 
 Game can be played in one player or two player modes.
 
 Good luck playing in one player mode.
+
+https://secret-thicket-74997.herokuapp.com/home.html
